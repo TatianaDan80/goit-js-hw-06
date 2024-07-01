@@ -1,34 +1,39 @@
-class StringBuilder {
-  #value;
+const inputElement = document.getElementById('name-input');
+const outputElement = document.getElementById('name-output');
 
-  constructor(initialValue) {
-    this.#value = initialValue;
+inputElement.addEventListener('input', (event) => {
+  const inputValue = event.target.value.trim(); 
+
+  if (inputValue === '') {
+    outputElement.textContent = 'Anonymous'; 
+  } else {
+    outputElement.textContent = inputValue; 
+  }
+});
+const form = document.querySelector('.login-form');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); 
+
+  
+  const emailValue = form.elements.email.value.trim();
+  const passwordValue = form.elements.password.value.trim();
+
+ 
+  if (emailValue === '' || passwordValue === '') {
+    alert('All form fields must be filled in');
+    return;
   }
 
-  getValue() {
-    return this.#value;
-  }
+  
+  const formData = {
+    email: emailValue,
+    password: passwordValue
+  };
 
-  padEnd(str) {
-    this.#value += str;
-  }
+  
+  console.log(formData);
 
-  padStart(str) {
-    this.#value = str + this.#value;
-  }
-
-  padBoth(str) {
-    this.padStart(str);
-    this.padEnd(str);
-  }
-}
-
-
-const builder = new StringBuilder(".");
-console.log(builder.getValue()); // "."
-builder.padStart("^");
-console.log(builder.getValue()); // "^."
-builder.padEnd("^");
-console.log(builder.getValue()); // "^.^"
-builder.padBoth("=");
-console.log(builder.getValue()); // "=^.^="
+ 
+  form.reset();
+});
